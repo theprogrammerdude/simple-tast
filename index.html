@@ -11,40 +11,51 @@
     <div class="form">
       <div id="error"></div>
       <div>
-        <label>Name</label>
-        <input type="text" id="name" placeholder="Enter Your Name" />
-      </div>
-      <div>
-        <label>Qualifications</label>
-        <input type="text" id="qual" placeholder="Enter Your Qualification" />
-      </div>
-      <div>
-        <label>Hobbies</label>
+        <label for="name">Name</label>
         <input
           type="text"
-          id="hobbies"
+          name="name"
+          data-model="name"
+          placeholder="Enter Your Name"
+        />
+      </div>
+      <div>
+        <label for="qual">Qualifications</label>
+        <input
+          type="text"
+          name="qual"
+          data-model="qual"
+          placeholder="Enter Your Qualification"
+        />
+      </div>
+      <div id="hobbies-div">
+        <label for="hobbies">Hobbies</label>
+        <input
+          type="text"
+          name="hobbies"
+          data-model="hobbies"
           placeholder="Enter Your Hobbies separated by a comma"
         />
       </div>
-      <button onclick="add()">+ Add</button>
+      <!-- <button onclick="add()">+ Add a Hobby</button> -->
     </div>
     <div class="text">
       <p>
-        I, <i><span class="display-name">_____________</span></i
-        >, would like to apply for an internship at your organisation.
+        I, <i><span class="display-name" data-binding="name"></span></i>, would
+        like to apply for an internship at your organisation.
       </p>
       <p>
-        My Qualification is <i><span id="display-qual">_____________</span></i
-        >.
+        My Qualification is
+        <i><span id="display-qual" data-binding="qual"></span></i>.
       </p>
       <p>
-        My hobbies are <i><span id="display-hobbies">_____________</span></i
-        >.
+        My hobbies are
+        <i><span id="display-hobbies" data-binding="hobbies"></span></i>.
       </p>
       <p>
         Thanking You <br />
         Your's Sincerely <br />
-        <i><span class="display-name">_____________</span></i>
+        <i><span class="display-name" data-binding="name"></span></i>
       </p>
     </div>
     <script type="text/javascript" src="./script.js"></script>

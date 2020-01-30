@@ -1,22 +1,49 @@
-function add() {
-  var qual = document.getElementById("qual").value;
-  var hobbies = document.getElementById("hobbies").value;
-  var name = document.getElementById("name").value;
-  var displayName = document.getElementsByClassName("display-name");
-
-  document.getElementById("display-qual").innerHTML = qual;
-  document.getElementById("display-hobbies").innerHTML = hobbies;
-
-  for (var i = 0; i < displayName.length; i++) {
-    displayName[i].innerHTML = name;
-
-    if (i < displayName.length) {
-      document.getElementById("name").value = "";
+const createState = state => {
+  return new Proxy(state, {
+    set(target, property, value) {
+      target[property] = value;
+      render();
+      return true;
     }
-  }
+  });
+};
 
-  if (error) {
-    document.getElementById("qual").value = "";
-    document.getElementById("hobbies").value = "";
-  }
-}
+const state = createState({
+  name: "____________",
+  qual: "____________",
+  hobbies: "____________"
+});
+
+const listeners = document.querySelectorAll("[data-model]");
+
+listeners.forEach(listener => {
+  const name = listener.dataset.model;
+
+  listener.addEventListener("keyup", event => {
+    state[name] = listener.value;
+    console.log(state);
+  });
+});
+
+const render = () => {
+  const bindings = Array.from(document.querySelectorAll("[data-binding]")).map(
+    e => e.dataset.binding
+  );
+  bindings.forEach(binding => {
+    document.querySelector(`[data-binding='${binding}']`).innerHTML =
+      state[binding];
+    document.querySelector(`[data-binding='${binding}']`).value =
+      state[binding];
+
+    if (binding[3]) {
+      document.querySelector(`[data-binding='${binding}']`).innerHTML =
+        state[binding];
+      document.querySelector(`[data-binding='${binding}']`).value =
+        state[binding];
+    }
+  });
+
+  // console.log([bindings]);
+};
+
+render();
